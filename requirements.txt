@@ -1,6 +1,7 @@
 transformers 
 accelerate 
+stable_diffusion_videos
 diffusers
 tqdm
 openai
-
+librosa
