@@ -37,7 +37,7 @@ def get_transcription_from_audios_folder(audio_filepath, output_dir):
     saida = output_dir
 
     #ID de usuário
-    id = "3d0c55ae-42d6-4dfc-ab69-1f8759e95d55"
+    id = "MOISES_API_ID"
 
     for musica in musicas:
         # Pega link para upload temporário
@@ -60,7 +60,7 @@ def get_transcription_from_audios_folder(audio_filepath, output_dir):
             "params": {"inputUrl": upload_response.json()['downloadUrl']}
         }
         headers = {
-            "Authorization": "3d0c55ae-42d6-4dfc-ab69-1f8759e95d55",
+            "Authorization": "MOISES_API_ID",
             "Content-Type": "application/json"
         }
         job_response = requests.request("POST", url, json=payload, headers=headers)
@@ -69,7 +69,7 @@ def get_transcription_from_audios_folder(audio_filepath, output_dir):
 
         while True:
             url = "https://developer-api.moises.ai/api/job/" + job_response.json()['id']
-            headers = {"Authorization": "3d0c55ae-42d6-4dfc-ab69-1f8759e95d55"}
+            headers = {"Authorization": "MOISES_API_ID"}
             status_response = requests.request("GET", url, headers=headers)
 
             if status_response.json()['status'] == 'SUCCEEDED':
@@ -83,7 +83,7 @@ def get_transcription_from_audios_folder(audio_filepath, output_dir):
         try:
             # Pega resultado
             url = "https://developer-api.moises.ai/api/job/" + job_response.json()['id']
-            headers = {"Authorization": "3d0c55ae-42d6-4dfc-ab69-1f8759e95d55"}
+            headers = {"Authorization": "MOISES_API_ID"}
             result_response = requests.request("GET", url, headers=headers)
             transcriptions_link = result_response.json()['result']['Transcription']
 
