@@ -1,8 +1,10 @@
-# Audio2TV - A MTV substitute
+# Music2TV - A MTV substitute
 
 An MTV Substitute
 
 ![MTV-Logo](imgs/mtv.jpg)
+
+To use it, it is necessary to create a [MOISES API](https://moises.ai/) and also an [OpenAI API](https://openai.com/blog/openai-api/).
 
 # Install
 
