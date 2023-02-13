@@ -6,8 +6,6 @@ import glob
 import os
 import argparse
 
-#pasta com músicas
-path = 'audio/*'
 
 def read_json_file(json_filepath):
 
@@ -32,12 +30,13 @@ def read_json_file(json_filepath):
 
 def get_transcription_from_audios_folder(audio_filepath, output_dir):
     musicas = glob.glob(audio_filepath)
-    nomes = [os.path.basename(x) for x in glob.glob(path)]
+    nomes = [os.path.basename(x) for x in glob.glob(audio_filepath)]
     #pasta de saída
     saida = output_dir
 
+    MOISES_API_ID = "3d0c55ae-42d6-4dfc-ab69-1f8759e95d55"
     #ID de usuário
-    id = "MOISES_API_ID"
+    id = MOISES_API_ID
 
     for musica in musicas:
         # Pega link para upload temporário
@@ -60,7 +59,7 @@ def get_transcription_from_audios_folder(audio_filepath, output_dir):
             "params": {"inputUrl": upload_response.json()['downloadUrl']}
         }
         headers = {
-            "Authorization": "MOISES_API_ID",
+            "Authorization": MOISES_API_ID,
             "Content-Type": "application/json"
         }
         job_response = requests.request("POST", url, json=payload, headers=headers)
@@ -69,7 +68,7 @@ def get_transcription_from_audios_folder(audio_filepath, output_dir):
 
         while True:
             url = "https://developer-api.moises.ai/api/job/" + job_response.json()['id']
-            headers = {"Authorization": "MOISES_API_ID"}
+            headers = {"Authorization": MOISES_API_ID}
             status_response = requests.request("GET", url, headers=headers)
 
             if status_response.json()['status'] == 'SUCCEEDED':
@@ -83,7 +82,7 @@ def get_transcription_from_audios_folder(audio_filepath, output_dir):
         try:
             # Pega resultado
             url = "https://developer-api.moises.ai/api/job/" + job_response.json()['id']
-            headers = {"Authorization": "MOISES_API_ID"}
+            headers = {"Authorization": MOISES_API_ID}
             result_response = requests.request("GET", url, headers=headers)
             transcriptions_link = result_response.json()['result']['Transcription']
 
@@ -102,9 +101,9 @@ def main():
     parser.add_argument('-i', '--audio_input', default='audio/audio.mp3')
     args = parser.parse_args()
 
-    input_dir=os.path.join(args.base_dir, args.audio_input)
+    input_filepath=os.path.join(args.base_dir, args.audio_input)
     output_folder=os.path.join(args.base_dir, args.output_folder)
-    get_transcription_from_audios_folder(audio_path=input_dir, output_dir=output_folder)
+    get_transcription_from_audios_folder(audio_path=input_filepath, output_dir=output_folder)
 
 
 if __name__ == "__main__":

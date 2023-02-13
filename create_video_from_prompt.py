@@ -3,7 +3,7 @@
 import argparse
 import torch
 import librosa
-from stable_diffusion_videos import StableDiffusionWalkPipeline, Interface
+from stable_diffusion_videos import StableDiffusionWalkPipeline
 import json
 import math
 
