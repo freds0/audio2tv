@@ -5,7 +5,7 @@ import os
 import argparse
 from diffusers import StableDiffusionPipeline, DPMSolverMultistepScheduler
 
-API_KEY = "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"
+API_KEY = "OPENAI_API_KEY"
 
 def read_json_file(json_filepath):
     
