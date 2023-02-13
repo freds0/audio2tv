@@ -1,0 +1,6 @@
+transformers 
+accelerate 
+diffusers
+tqdm
+openai
+
