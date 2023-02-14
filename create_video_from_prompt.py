@@ -45,6 +45,7 @@ def get_video_from_prompt(text_prompts, audio_filepath='audio/audio.mp3'):
         "CompVis/stable-diffusion-v1-4",
         torch_dtype=torch.float16,
         revision="fp16",
+        safety_checker=None
     ).to("cuda")
 
     y, sr = librosa.load(audio_filepath)
