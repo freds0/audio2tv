@@ -34,7 +34,7 @@ def get_transcription_from_audios_folder(audio_filepath, output_dir):
     #pasta de saída
     saida = output_dir
 
-    MOISES_API_ID = "3d0c55ae-42d6-4dfc-ab69-1f8759e95d55"
+    MOISES_API_ID = "##################YOUR_MOISES_API_ID_HERE######################"
     #ID de usuário
     id = MOISES_API_ID
 
